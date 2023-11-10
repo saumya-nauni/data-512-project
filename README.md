@@ -12,15 +12,27 @@ This research aims to provide a thorough examination of the impact of wildfires 
 │   └── Histogram.png
 │   ├── Predictive Model.png
 │   └── Total Acres Burned Per Year.png
-├── analysis.ipynb
-├── api_data.ipynb
+├── src
+│   ├── reference-notebooks
+│       ├── epa_air_quality_history_example.ipynb
+│       └── wildfire_geo_proximity_example.ipynb
+│   ├── aqi-data.ipynb
+│   └── wildfire-data.ipynb
+│   ├── functions.py
+│   └── smoke-estimator.ipynb
+│   └── data-analysis-and-visualizations.ipynb
+├── wildfire
+│   ├── Reader.py
 ├── README.md
 ├── LICENSE
-├── json-data
-│   ├── academy_monthly_cumulative_201507-202309.json
-│   ├── academy_monthly_desktop_201507-202309.json
-│   └── academy_monthly_mobile_201507-202309.json
 ```
+### Repository Information
+
+> - `src/aqi-data.ipynb` - Notebook that extracts the AQI data for Muskogee, Oklahoma
+> - `src/wildfire.ipynb` - Notebook read the raw file containing information of all wildfires and calculates the geodetic distance between the place of the wildfire and the city.
+> - `src/functions.py` - Python file containing helper functions used in wildfire.ipynb. The functions here are taken from the reference notebook.
+> - `src/smoke-estimator.ipynb` - Calculates the smoke impact estimator for all the wildfires. These values are then used for the visualizations.
+> - `src/data-analysis-and-visualizations.ipynb` - Contains all the visualizations and the predictive model for the next 25 years.
 
 ## Introduction
 
@@ -78,8 +90,73 @@ By applying these filters, our analysis ensures a targeted investigation into th
 
 ### Smoke Estimation:
 
-Advanced modeling techniques will be employed to estimate the spatial and temporal distribution of smoke in Grand Fork County. This will involve integrating satellite observations, ground-based measurements, and meteorological data to create a comprehensive smoke dispersion model.
+The methodology employed for smoke estimation in this analysis revolves around a proximity impact approach, emphasizing the significance of both distance and fire size in determining the extent of smoke impact. Two crucial factors, proximity, and fire size, are considered to quantitatively assess the potential influence of wildfires on the study area.
 
-### Correlation Analysis:
+1. **Proximity Impact:**
 
-The relationship between smoke concentrations and AQI will be explored using statistical methods. This analysis aims to quantify the impact of wildfire-induced smoke on air quality, providing insights into potential health risks and environmental consequences.
+   The distance between the wildfires and the designated study area plays a pivotal role in our smoke estimation. The rationale behind this criterion is that the closer a wildfire is to the region of interest, the more substantial its impact on air quality and environmental conditions is likely to be. By prioritizing proximity, we aim to capture the localized effects of wildfires, recognizing that their influence diminishes with increasing distance.
+
+2. **Fire Size Consideration:**
+
+   In addition to proximity, the size of the wildfires is a key determinant in our smoke estimation model. Larger fires inherently have the potential to produce more significant amounts of smoke, even at a considerable distance. Therefore, the methodology takes into account the dual influence of both proximity and fire size to provide a more nuanced and realistic representation of the potential impact on the study area.
+
+**Formula for Smoke Impact**
+
+    smoke_impact = (-decay_rate * distance) * fire_size
+
+By incorporating these factors into our smoke estimation model, we aim to generate a more accurate and context-specific understanding of the potential consequences of wildfires on air quality. This dual approach ensures that the analysis not only considers the immediate vicinity of wildfires but also acknowledges the varying degrees of impact based on the size of the fires, thereby contributing to a more comprehensive assessment of the environmental effects of wildland fires.
+
+## Visual Analytics
+
+### 1. Histogram
+
+![Alt text](images/Histogram.png)
+
+The image above shows the number of fires every 50 miles from the city of Muskogee, Oklahoma.
+
+### 2. Time Series
+
+![Alt text](<images/Total Acres Burned Per Year.png>)
+
+The above image shows a time series graph of the total number of acres burned as a result of wildfires for each year between 1963 - 2023.
+
+### 3. AQI vs Smoke Estimator
+
+![Alt text](<images/AQI vs Smoke Impact.png>)
+
+The image above shows two different lines on the same plot. The avg AQI per year and the corresponding smoke estimator calculated.
+
+To make the smoke estimator line more readable wrt to the AQI, we have also tried using min-max scaling. The result is the following image.
+
+![Alt text](<images/AQI vs Smoke Impact (Min-Max Scaling).png>)
+
+### Predictive Model
+
+![Alt text](<images/Predictive Model.png>)
+
+The image above shows the predicted smoke_impact values for the next 25 years.
+
+## Reproducing the Analysis
+
+### 1. Clone the Repository
+
+Begin by making a local copy of this repository. You can do this by running the following command in your terminal or command prompt:
+```bash
+git clone https://github.com/saumya-nauni/data-512-project.git
+```
+
+### 2. Download and Extract the Dataset
+
+- You can download the `GeoJSON Files.zip` from this [link](https://www.sciencebase.gov/catalog/item/61aa537dd34eb622f699df81). Once you have this downloaded you will see the `USGS_Wildland_Fire_Combined_Dataset.json` file.
+- Alternatively, you can use the [Google Drive](https://drive.google.com/drive/folders/1yFBJI2Wcvlb03Z_4gHqJLhdMF2BQQp-M?usp=sharing) to download the same dataset.
+
+### 3. Execute the Notebook Cells
+
+- First start by running the cells in the `wildfire-data.ipynb` notebook. You can change the city here according to your use. The result of this step would give you two files: the raw data file (`muskogee-wildfire.json`) and the cleaned file (`muskogee.csv`)
+- The second step is run to the `smoke-estimator.ipynb` notebook to get all values of the smoke_impact for each wildfire. The result is the dataset `smoke-estimators.csv`
+- The next step is to get the avg AQI values for each year. For this run the cells in the `aqi-data.ipynb` notebook. The result would be the dataset `avg-aqi-yearly.csv`
+- Last, you would have to run the `data-analysis-and-visualizations.ipynb` notebook to get all the visualizations along with the predictive model.
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
