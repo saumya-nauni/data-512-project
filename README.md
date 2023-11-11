@@ -25,6 +25,7 @@ This research aims to provide a thorough examination of the impact of wildfires 
 │   ├── Reader.py
 ├── README.md
 ├── LICENSE
+├── Reflections.pdf
 ```
 ### Repository Information
 
@@ -116,7 +117,7 @@ The image above shows the number of fires every 50 miles from the city of Muskog
 
 ### 2. Time Series
 
-![Alt text](<images/Total Acres Burned Per Year.png>)
+![Alt text](<images/Total Acres Burned.png>)
 
 The above image shows a time series graph of the total number of acres burned as a result of wildfires for each year between 1963 - 2023.
 
@@ -128,7 +129,7 @@ The image above shows two different lines on the same plot. The avg AQI per year
 
 To make the smoke estimator line more readable wrt to the AQI, we have also tried using min-max scaling. The result is the following image.
 
-![Alt text](<images/AQI vs Smoke Impact (Min-Max Scaling).png>)
+![Alt text](<images/AQI vs Smoke Impact (Min-Max).png>)
 
 ### Predictive Model
 
