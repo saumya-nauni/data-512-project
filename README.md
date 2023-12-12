@@ -14,14 +14,14 @@ This research aims to provide a thorough examination of the impact of wildfires 
 │     ├── Predictive Model.png
 │     └── Total Acres Burned Per Year.png
 │   ├── crop-visualizations
-│     ├── Covariance Matrix for Corn.png
-│     ├── Covariance Matrix for Soybeans.png
-│     └── Crop Impact vs AQI for Corn.png
-│     ├── Crop Impact vs AQI for Soybeans.png
+│     ├── Covariance Matrix Corn.png
+│     ├── Covariance Matrix Soybeans.png
+│     └── Crop Impact vs AQI Corn.png
+│     ├── Crop Impact vs AQI Soybeans.png
 │     ├── Crop vs Smoke Impact Corn.png
 │     ├── Crop vs Smoke Impact Soybeans.png
-│     └── Predictive Model for Corn.png
-│     └── Predictive Model for Soybeans.png
+│     └── Predictive Model Corn.png
+│     └── Predictive Model Soybeans.png
 ├── src
 │   ├── reference-notebooks
 │       ├── epa_air_quality_history_example.ipynb
