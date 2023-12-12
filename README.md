@@ -1,4 +1,4 @@
-# Muskogee, Oklahoma Wildfire Analysis
+# Muskogee, Oklahoma Wildfire Impact Analysis on Crop Production
 
 This research aims to provide a thorough examination of the impact of wildfires on cro production in Muskogee, Oklahoma by estimating the effects of smoke over the last six decades. The study involves a multifaceted approach, encompassing data extraction, filtering, smoke estimation, crop impact estimation and visual analysis with Air Quality Index (AQI) data, and the development of a forecasting model to project future smoke concentrations and crop impacts.
 
